@@ -1,0 +1,128 @@
+<script>
+	/**
+	 * @type {any}
+	 */
+	export let user = null;
+	//list of 20 bright and happy colors that work well together in a gradient
+</script>
+
+<div class="header">
+	<div class="logo-container">
+		<a href="./"><div class="logo">Quiz Quest</div></a>
+	</div>
+	<div class="pages-container">
+		<ul>
+			<a href="./blog"><li class="page-item hover-underline-animation">Blog</li></a>
+			<a href="./take-a-quiz"><li class="page-item hover-underline-animation">Take a Quiz</li></a>
+			<a href="./make-quiz"><li class="page-item hover-underline-animation">Make a Quiz</li></a>
+			{#if user == null}
+				<a href="./login"><li class="login page-item">Sign In</li></a>
+			{:else}
+				<a href="./login"><div class="login">Login</div></a>
+			{/if}
+		</ul>
+	</div>
+</div>
+
+<style>
+	.pages-container {
+		width: fit-content;
+		float: right;
+		margin: auto;
+		margin-top: 30px;
+		margin-right: 20px;
+	}
+	.page-item {
+		display: inline-block;
+	}
+	.login {
+		color: white;
+		font-size: 18px;
+		letter-spacing: 3px;
+		width: fit-content;
+		float: right;
+		background-image: linear-gradient(to left top, #cc3363, #bd5ca6, #9583d0, #70a1db, #73b7d3);
+		padding: 10px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		font-weight: 400;
+		border-radius: 6px;
+		font-family: var(--font-sans);
+		border: 1.5px solid var(--pure-background-color);
+		transform: translate(0, -5px);
+	}
+	.login:hover {
+		background-image: linear-gradient(
+			to left top,
+			#cc3867,
+			#d1327c,
+			#d13293,
+			#cb38ad,
+			#be44c8,
+			#a55bdd,
+			#866eee,
+			#5e7efa,
+			#2e91f7,
+			#1d9feb,
+			#42a9dc,
+			#6ab1cc
+		);
+	}
+	.header {
+		position: absolute;
+		background-color: rgba(0, 0, 0, 0);
+		height: fit-content;
+		width: fit-content;
+		top: 0;
+		z-index: 1000;
+		width: 100%;
+	}
+	.logo {
+		margin: 20px;
+		font-size: 40px;
+		letter-spacing: 8px;
+		font-weight: 250;
+		color: #fff;
+		float: left;
+		border: 2.5px solid white;
+		padding: 5px;
+	}
+	.logo:hover {
+		background: linear-gradient(
+			to right,
+			transparent 20%,
+			rgb(223, 69, 128),
+			#f3715c,
+			#fbb040,
+			#10ac8f,
+			#3d99d4,
+            rgb(166, 43, 175),
+			#e51359
+		);
+		background-size: 200%;
+		background-position: right;
+		transition: 0.4s ease;
+	}
+	.hover-underline-animation {
+		display: inline-block;
+		position: relative;
+	}
+
+	.hover-underline-animation::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		transform: scaleX(0);
+		height: 2px;
+		bottom: 0;
+		left: 0;
+		background-color: #fff;
+		transform-origin: bottom right;
+		transition: transform 0.25s ease-out;
+	}
+
+	.hover-underline-animation:hover::after {
+		transform: scaleX(1);
+		transform-origin: bottom left;
+	}
+</style>
