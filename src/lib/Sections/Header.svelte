@@ -3,12 +3,16 @@
 	 * @type {any}
 	 */
 	export let user = null;
+    let logo_text = 'Q'
+    if (typeof window !== 'undefined') {
+        logo_text = window.innerWidth <780 ? 'Q' : 'Quiz Quest';
+    }
 	//list of 20 bright and happy colors that work well together in a gradient
 </script>
 
 <div class="header">
 	<div class="logo-container">
-		<a href="./"><div class="logo">Quiz Quest</div></a>
+		<a href="./"><div class="logo">{logo_text}</div></a>
 	</div>
 	<div class="pages-container">
 		<ul>
@@ -34,11 +38,13 @@
 	}
 	.page-item {
 		display: inline-block;
+        margin-right: 0vw;
+        padding: 0px;
 	}
 	.login {
 		color: white;
 		font-size: 18px;
-		letter-spacing: 3px;
+		letter-spacing: 0.1vw;
 		width: fit-content;
 		float: right;
 		background-image: linear-gradient(to left top, #cc3363, #bd5ca6, #9583d0, #70a1db, #73b7d3);
@@ -80,7 +86,7 @@
 	.logo {
 		margin: 20px;
 		font-size: 40px;
-		letter-spacing: 8px;
+		letter-spacing: 0px;
 		font-weight: 250;
 		color: #fff;
 		float: left;
@@ -125,4 +131,12 @@
 		transform: scaleX(1);
 		transform-origin: bottom left;
 	}
+    @media screen and (max-width: 568px) {
+        .page-item {
+            font-size: 2.9vw;
+        }
+        .logo {
+            font-size: 6.5vw;   
+        }
+    }
 </style>
