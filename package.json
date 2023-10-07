@@ -29,6 +29,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"bcrypt": "^5.1.1",
+		"bcryptjs": "^2.4.3",
 		"gh-pages": "^6.0.0",
 		"lodash.debounce": "^4.0.8"
 	}

@@ -80,11 +80,6 @@ html::-webkit-scrollbar {
     -moz-osx-font-smoothing: grayscale;
   }
   
-  ::selection {
-    background: var(--pure-text-color);
-    color: var(--primary-color);
-  }
-  
   #svelte {
     min-height: 100vh;
     display: flex;

@@ -86,7 +86,7 @@
         width:fit-content;
         display: inline-block;
         transform: scale(2);
-        translate: 8vw -20vh;
+        translate: 10vw -20vh;
         text-shadow: 0 0 10px 10px #fff;
         /*transform: translate(0px, -20vh);*/
 	}
