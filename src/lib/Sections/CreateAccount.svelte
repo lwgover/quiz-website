@@ -1,5 +1,7 @@
 <script>
 	// @ts-nocheck
+    import bcrypt from 'bcryptjs';
+    let passwordMatch = false;
 
 	var status = 'waiting';
 	async function loginUser(credentials) {
@@ -12,7 +14,7 @@
 		};
 
 		// Perform user authentication
-		return fetch('http://127.0.0.1:5000/login', {
+		return fetch('http://127.0.0.1:5000/CreateUser', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -40,6 +42,8 @@
 		// @ts-ignore
 		var password = document.getElementById('password');
 		// @ts-ignore
+        var password2 = document.getElementById('password2');
+
 		if (username.value === '') {
 			// @ts-ignore
 			username.parentElement.style.color = 'red';
@@ -64,8 +68,30 @@
 			// @ts-ignore
 			password.style.borderColor = '#777';
 		}
+        if (password.value != password2.value) {
+            passwordMatch = false;
+			// @ts-ignore
+			password.parentElement.style.color = 'red';
+			// @ts-ignore
+			password.style.borderColor = 'red';
+            // @ts-ignore
+			password2.parentElement.style.color = 'red';
+			// @ts-ignore
+			password2.style.borderColor = 'red';
+            
+		} else {
+            passwordMatch = true;
+			// @ts-ignore
+			password.parentElement.style.color = '#555';
+			// @ts-ignore
+			password.style.borderColor = '#777';
+            // @ts-ignore
+			password2.parentElement.style.color = '#555';
+			// @ts-ignore
+			password2.style.borderColor = '#777';
+		}
 		// @ts-ignore
-		if (!(username.value === '') && !(password.value === '')) {
+		if (!(username.value === '') && !(password.value === '') && (password.value === password2.value)) {
 			const data = {
 				// @ts-ignore
 				username: username.value,
@@ -80,7 +106,7 @@
 
 <section class="login">
 	<div class="login-container">
-		<div class="login-title">Sign In</div>
+		<div class="login-title">Create Account</div>
 		{#if status.localeCompare('loading') == 0}
 			<div class="center-ellipsis">
 				<div class="lds-ellipsis">
@@ -100,6 +126,10 @@
         <div class="text-input-container" style="color: red; text-align:center; transform: translate(0, -3vh);">
             Invalid Username or Password, please try again</div>
             {/if}
+            {#if !passwordMatch}
+            <div class="text-input-container" id='noMatch' style="color: red; text-align:center; transform: translate(0, -3vh);">
+                Passwords don't match</div>
+            {/if}
 			<form>
 				<label class="text-input-container">
 					Username
@@ -109,19 +139,21 @@
 					Password
 					<input class="text-input" type="text" id="password" placeholder="Password" />
 				</label>
+                <label class="text-input-container">
+					Confirm Password
+					<input class="text-input" type="text" id="password2" placeholder="Password" />
+				</label>
 
 				<input class="submit-button" type="submit" value="login →" on:click={() => submitForm()} />
-				<div class="text-input-container" style="text-align:center; padding: 2vh;">
-					First time User? <a href="./create-account" style="color: var(--primary-color)"
-						>Create an Account.</a
-					>
-				</div>
 			</form>
 		{/if}
 	</div>
 </section>
 
 <style>
+    #noMatch {
+        display:none; 
+    }
     .profile-button {
         padding: 20px;
         margin:auto;
@@ -181,8 +213,8 @@
 	.text-input {
 		outline: none;
 		margin: auto;
-		margin-top: 0.5vh;
-		margin-bottom: 5vh;
+		margin-top: 0.3vh;
+		margin-bottom: 3vh;
 		border-top: 0px;
 		border-left: 0px;
 		border-right: 0px;
@@ -211,19 +243,22 @@
 	}
 	.login-title {
 		display: relative;
-		font-size: 8vh;
+		font-size: 7vh;
 		color: #333;
 		font-style: italic;
 		letter-spacing: 3px;
 		margin: 3.5vh;
-		margin-bottom: 7vh;
+		margin-bottom: 5vh;
 		text-align: center;
 		font-weight: 500;
 	}
 	@media screen and (max-width: 650px) {
 		.login-container {
-			width: 80vw;
+			width: 90vw;
 		}
+        .submit-button {
+            margin-top: 0px;
+        }
 	}
 
 	/** From https://loading.io/css/*/

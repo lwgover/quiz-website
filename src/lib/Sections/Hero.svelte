@@ -1,13 +1,4 @@
 <script>
-	//translate highlight to the mouse x and y
-	if (typeof window !== 'undefined') {
-		window.addEventListener('mousemove', function (e) {
-			let highlight = document.getElementById('highlight');
-			// @ts-ignore
-			highlight.style.transform =
-				'translate(' + (e.x - 400) + 'px,' + (e.y - 400 + window.scrollY) + 'px)';
-		});
-	}
 	let colors = [
 		'#8c4b6f',
 		'#f3715c',
@@ -30,15 +21,13 @@
 		'#FFA931',
 		'#Fa5b30'
 	];
-	var oiwndoan = '${colors[Math.floor(Math.random()*colors.length)]}';
 </script>
 
 <section class="Hero">
 	<div class="hero-container">
-		<div class="blue-circle" style="transform: translate(-20vw,-40vh)" />
+		<div class="blue-circle" />
 		<div class="green-circle" style="transform: translate(70vw,0vh)" />
-		<div class="red-circle" style="transform: translate(30vw,50vh)" />
-		<div id="highlight" />
+		<div class="red-circle" style="transform: translate(30vw,0vh)" />
         <div class='quiz-picture-container-container-bc-im-good-at-css-and-naming'>
 		<div class="quiz-picture-gradient-outline">
 			<div class="quiz-picture-container">
@@ -76,6 +65,9 @@
 </section>
 
 <style>
+	.Hero {
+		overflow: hidden;
+	}
     .quiz-picture-container-container-bc-im-good-at-css-and-naming {
         margin:40px;
         margin-top: 200px;
@@ -207,6 +199,7 @@
 		background-color: white;
 		border-radius: 12px;
 		overflow: hidden;
+		box-shadow: 0px 0vh 2vh 0.3vh rgba(255,255,255, 0.2);
 	}
 	ul {
 		list-style: none; /* Remove default bullets */
@@ -237,8 +230,10 @@
 			rgba(1, 1, 1, 0),
 			rgba(1, 1, 1, 0)
 		);
-		height: 150vh;
-		width: 150vh;
+		height: 130vh;
+		width: 130vh;
+		left: -20vw;
+		top: -40vh;
 	}
 	.green-circle {
 		position: absolute;
@@ -262,9 +257,13 @@
 	}
 	#highlight {
 		position: absolute;
-		background: radial-gradient(rgba(255, 255, 255, 0.04) 45%, rgba(1, 1, 1, 0), rgba(1, 1, 1, 0));
-		height: 800px;
-		width: 800px;
+		height: 30px;
+		width: 30px;
+		border-radius: 15px;
+		background:white;
+		-webkit-filter: invert(100%);
+    	filter: invert(100%);
+		z-index: 1001;
 	}
 	@media screen and (max-width: 768px) {
 		#highlight {

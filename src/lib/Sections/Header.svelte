@@ -3,6 +3,10 @@
 	 * @type {any}
 	 */
 	export let user = null;
+	import { getContext } from 'svelte';
+	import { cursor_size } from '../../stores/global.js';
+	let size = $cursor_size;
+	
     let logo_text = 'Q'
     if (typeof window !== 'undefined') {
         logo_text = window.innerWidth <780 ? 'Q' : 'Quiz Quest';
@@ -12,15 +16,15 @@
 
 <div class="header">
 	<div class="logo-container">
-		<a href="./"><div class="logo">{logo_text}</div></a>
+		<a href="./"><div class="logo" role="none" on:mouseenter={() => size.set(5)} on:mouseleave={() => size.set(15)}>{logo_text}</div></a>
 	</div>
 	<div class="pages-container">
 		<ul>
-			<a href="./blog"><li class="page-item hover-underline-animation">Blog</li></a>
-			<a href="./take-a-quiz"><li class="page-item hover-underline-animation">Take a Quiz</li></a>
-			<a href="./make-quiz"><li class="page-item hover-underline-animation">Make a Quiz</li></a>
+			<a href="./blog"><li class="page-item hover-underline-animation" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>Blog</li></a>
+			<a href="./take-a-quiz"><li class="page-item hover-underline-animation" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>Take a Quiz</li></a>
+			<a href="./make-quiz"><li class="page-item hover-underline-animation" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>Make a Quiz</li></a>
 			{#if user == null}
-				<a href="./login"><li class="login page-item">Sign In</li></a>
+				<a href="./login"><li class="login page-item" on:mouseenter={() => size.set(5)} on:mouseleave={() => size.set(15)}>Sign In</li></a>
 			{:else}
 				<a href="./login"><div class="login">Login</div></a>
 			{/if}
@@ -73,6 +77,7 @@
 			#42a9dc,
 			#6ab1cc
 		);
+		cursor: none;
 	}
 	.header {
 		position: absolute;
@@ -94,6 +99,7 @@
 		padding: 5px;
 	}
 	.logo:hover {
+		cursor: none;
 		background: linear-gradient(
 			to right,
 			transparent 20%,
@@ -108,10 +114,13 @@
 		background-size: 200%;
 		background-position: right;
 		transition: 0.4s ease;
+		z-index: 1000;
 	}
 	.hover-underline-animation {
 		display: inline-block;
 		position: relative;
+		cursor: none;
+		z-index: 1000;
 	}
 
 	.hover-underline-animation::after {
@@ -125,11 +134,14 @@
 		background-color: #fff;
 		transform-origin: bottom right;
 		transition: transform 0.25s ease-out;
+		cursor: none;
 	}
 
 	.hover-underline-animation:hover::after {
 		transform: scaleX(1);
 		transform-origin: bottom left;
+		cursor: none;
+		z-index: 1000;
 	}
     @media screen and (max-width: 568px) {
         .page-item {

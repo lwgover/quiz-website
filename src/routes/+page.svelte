@@ -2,6 +2,8 @@
 	import Seo from '$lib/Seo.svelte';
 	import Hero from '$lib/Sections/Hero.svelte';
 	import Header from '$lib/Sections/Header.svelte';
+	import Search from '$lib/Sections/Search.svelte';
+	import Cursor from '$lib/Sections/Cursor.svelte';
 
 	/**
 	 * @type {number}
@@ -25,6 +27,8 @@
 <main id="home">
 	<Header/>
 	<Hero/>
+	<Search/>
+	<Cursor/>
 
 		<!--
     <Projects projects={data.projects} />

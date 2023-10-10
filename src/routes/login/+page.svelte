@@ -64,6 +64,7 @@
 		/* background-color: var(--primary-color); */
 		z-index: 100; /* This is over the nav */
 		position: relative;
+		cursor: pointer;
 
 		/*background-image: url('');*/
 	}

@@ -1,7 +1,6 @@
 <script>
 	import Seo from '$lib/Seo.svelte';
-	import Login from '$lib/Sections/Login.svelte';
-	import Header from '$lib/Sections/Header.svelte';
+	import CreateAccount from '$lib/Sections/CreateAccount.svelte';
 
 	/**
 	 * @type {number}
@@ -42,7 +41,7 @@
 <main id="home" style={`background: linear-gradient( to bottom right, ${
     colors[Math.floor(Math.random() * colors.length)]
 }, ${colors[Math.floor(Math.random() * colors.length)]});`}>
-	<Login/>
+	<CreateAccount/>
 
 		<!--
     <Projects projects={data.projects} />
@@ -64,6 +63,7 @@
 		/* background-color: var(--primary-color); */
 		z-index: 100; /* This is over the nav */
 		position: relative;
+		cursor: pointer;
 
 		/*background-image: url('');*/
 	}

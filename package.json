@@ -32,6 +32,8 @@
 		"bcrypt": "^5.1.1",
 		"bcryptjs": "^2.4.3",
 		"gh-pages": "^6.0.0",
-		"lodash.debounce": "^4.0.8"
+		"lodash.debounce": "^4.0.8",
+		"svelte-quicksearch-bar": "^1.0.5",
+		"svelte-search": "^2.0.1"
 	}
 }
