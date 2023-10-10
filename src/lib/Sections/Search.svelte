@@ -1,5 +1,7 @@
 <script>
+	import { onMount } from 'svelte';
 	import { cursor_size } from '../../stores/global.js';
+	import { slide } from 'svelte/transition';
 	let size = $cursor_size;
 	let value = '';
 
@@ -27,14 +29,32 @@
 	];
 
 	/**
-	 * @type {any}
+	 * @type {Array}
 	 */
 	let quizzes = [
-		[null, null, null],
-		[null, null, null],
-		[null, null, null],
-		[null, null, null]
+		{
+			author: null,
+			description: null,
+			title: null
+		},
+		{
+			author: null,
+			description: null,
+			title: null
+		},
+		{
+			author: null,
+			description: null,
+			title: null
+		},
+		{
+			author: null,
+			description: null,
+			title: null
+		}
 	];
+	console.log(quizzes);
+	const delay = (/** @type {number} */ ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	/**
 	 * @param {any} value
@@ -42,7 +62,7 @@
 	async function search(value) {
 		let searchTerm = { searchTerm: value };
 		console.log(JSON.stringify(searchTerm));
-
+		await delay(1000);
 		return fetch('http://127.0.0.1:5000/Search', {
 			method: 'POST',
 			headers: {
@@ -58,10 +78,11 @@
 				}
 			})
 			.then((respData) => {
-				console.log(respData); // <-- log JSON response here
-				return respData; // return JSON response for access in your promise chain
+				console.log(respData['quizzes']); // <-- log JSON response here
+				quizzes = respData['quizzes']; // return JSON response for access in your promise chain
 			});
 	}
+	onMount(() => search(''));
 </script>
 
 <section class="search">
@@ -75,7 +96,14 @@
 			>
 				<div class="search-bar-underline">
 					<form on:submit={() => search(value)} class="search-bar" on:submit|preventDefault>
-						<input class="search-bar-input" type="text" name="query" placeholder="Search..." />
+						<input
+							class="search-bar-input"
+							bind:value
+							type="text"
+							name="query"
+							placeholder="Search..."
+							autocomplete="one-time-code"
+						/>
 						<button type="submit" class="search-bar-submit-button"
 							><div class="search-bar-submit">&#9906;</div></button
 						>
@@ -84,31 +112,42 @@
 			</div>
 			<div class="search-results">
 				<div class="search-results-flex-container">
-					{#each quizzes as quiz}
-						<div
-							class="search-quiz-mini"
-							style={`background: linear-gradient( to bottom right, ${
-								colors[Math.floor(Math.random() * colors.length)]
-							}, ${colors[Math.floor(Math.random() * colors.length)]});`}
-						>
-							<div class="search-quiz-mini-background">
-								<div class="search-results-title search-results-loading">
-									{#if quiz[0] === null}
-										<div class="search-result-title-loading" />
-									{:else}
-										QUIZ TITLE
-									{/if}
-								</div>
-								<div class="search-results-author search-results-loading">
-									{#if quiz[1] === null}
-										<div class="search-result-author-loading" />
-									{:else}
-										QUIZ TITLE
-									{/if}
+					{#if quizzes.length > 0}
+						{#each quizzes as quiz}
+							<div
+								class="search-quiz-mini"
+								style={`background: linear-gradient( to bottom right, ${
+									colors[Math.floor(Math.random() * colors.length)]
+								}, ${colors[Math.floor(Math.random() * colors.length)]});`}
+								transition:slide={{ delay: 200, duration: 300, axis: 'x' }}
+								role="none"
+							>
+								<div class="search-quiz-mini-background">
+									<div class="search-results-title search-results-loading">
+										{#if quiz['title'] === null}
+											<div class="search-result-title-loading"><div class="loading-shine" /></div>
+										{:else}
+											{quiz['title']}
+										{/if}
+									</div>
+									<div class="search-results-author search-results-loading">
+										{#if quiz['author'] === null}
+											<div class="search-result-author-loading"><div class="loading-shine" /></div>
+										{:else}
+											{quiz['author']}
+										{/if}
+									</div>
 								</div>
 							</div>
+						{/each}
+					{:else}
+						<div
+							class="search-results-title"
+							transition:slide={{ delay: 200, duration: 300, axis: 'x' }}
+						>
+							Sorry, We couldn't find any Quizzes with that name
 						</div>
-					{/each}
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -116,42 +155,61 @@
 </section>
 
 <style>
-    @keyframes search-quiz-mini-hover-in {
+	.loading-shine {
+		position: relative;
+		top: 0;
+		height: 100%;
+		width: 6vh;
+		background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+		animation: shine 2.5s infinite linear;
+		transform: translate(-100px, 0px);
+	}
+	@keyframes shine {
+		0% {
+			transform: translate(-50px, 0px);
+		}
+		100% {
+			transform: translate(360px, 0px);
+		}
+	}
+	@keyframes search-quiz-mini-hover-in {
 		from {
-			transform: scale(1.00);
-            box-shadow: 0px 0px 20px 8px rgba(0, 0, 10, 0.08);
+			transform: scale(1);
+			box-shadow: 0px 0px 20px 8px rgba(0, 0, 10, 0.08);
 		}
 		to {
 			transform: scale(1.05);
-            box-shadow: 0px 0px 5px 8px rgba(0, 0, 10, 0.10);
+			box-shadow: 0px 0px 5px 8px rgba(0, 0, 10, 0.1);
 		}
 	}
-    @keyframes search-quiz-mini-hover-out {
+	@keyframes search-quiz-mini-hover-out {
 		to {
-			transform: scale(1.00);
-            box-shadow: 0px 0px 20px 8px rgba(0, 0, 10, 0.08);
+			transform: scale(1);
+			box-shadow: 0px 0px 20px 8px rgba(0, 0, 10, 0.08);
 		}
 		from {
 			transform: scale(1.05);
-            box-shadow: 0px 0px 5px 8px rgba(0, 0, 10, 0.10);
+			box-shadow: 0px 0px 5px 8px rgba(0, 0, 10, 0.1);
 		}
 	}
-    .search-quiz-mini:hover {
-        animation: search-quiz-mini-hover-in 0.3s;
-        transform: scale(1.05);
-        box-shadow: 0px 0px 5px 8px rgba(0, 0, 10, 0.10);
-    }
+	.search-quiz-mini:hover {
+		animation: search-quiz-mini-hover-in 0.3s;
+		transform: scale(1.05);
+		box-shadow: 0px 0px 5px 8px rgba(0, 0, 10, 0.1);
+	}
 	.search-result-author-loading {
 		background: rgba(255, 255, 255, 0.5);
 		width: 60%;
 		height: 30px;
 		border-radius: 10px;
+		overflow: hidden;
 	}
 	.search-result-title-loading {
 		background: rgba(255, 255, 255, 0.5);
 		width: 80%;
 		height: 40px;
 		border-radius: 10px;
+		overflow: hidden;
 	}
 	.search-results-author {
 		width: 100%;
@@ -201,7 +259,7 @@
 		border-radius: 20px;
 		box-shadow: 0px 0px 20px 8px rgba(0, 0, 10, 0.08);
 		overflow: hidden;
-        animation: search-quiz-mini-hover-out 0.3s;
+		animation: search-quiz-mini-hover-out 0.3s;
 	}
 	.search-bar-submit {
 		-webkit-transform: rotate(45deg);

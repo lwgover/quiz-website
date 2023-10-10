@@ -6,6 +6,9 @@
     let X = 0;
     let Y = 0;
     let scrollY = 0;
+    if (typeof window !== 'undefined') {
+        scrollY= window.scrollY;
+    }
 
 	let coords1 = tweened(
 		{ x: 0, y: 0 },
