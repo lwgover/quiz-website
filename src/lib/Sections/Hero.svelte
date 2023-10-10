@@ -1,4 +1,6 @@
 <script>
+	import { cursor_size } from '../../stores/global.js';
+	let size = $cursor_size;
 	let colors = [
 		'#8c4b6f',
 		'#f3715c',
@@ -46,17 +48,17 @@
                     <div class="quiz-picture-title" style='width: 50%' />
 				</div>
 				<ul class="quiz-picture-question-list">
-					<li class="quiz-picture-question" />
-					<li class="quiz-picture-question" />
-					<li class="quiz-picture-question" />
-					<li class="quiz-picture-question" />
+					<li class="quiz-picture-question" role="none" on:mouseenter={() => size.set(20)} on:mouseleave={() => size.set(15)}/>
+					<li class="quiz-picture-question" role="none" on:mouseenter={() => size.set(20)} on:mouseleave={() => size.set(15)}/>
+					<li class="quiz-picture-question" role="none" on:mouseenter={() => size.set(20)} on:mouseleave={() => size.set(15)}/>
+					<li class="quiz-picture-question" role="none" on:mouseenter={() => size.set(20)} on:mouseleave={() => size.set(15)}/>
 				</ul>
 			</div>
 		</div>
         </div>
         <div class="promo-text-container">
-            <div class="promo-subtitle">Welcome to</div>
-            <div class="promo-title">Quiz Quest!</div>
+            <div class="promo-subtitle" role="none" on:mouseenter={() => size.set(30)} on:mouseleave={() => size.set(15)}>Welcome to</div>
+            <div class="promo-title" role="none" on:mouseenter={() => size.set(30)} on:mouseleave={() => size.set(15)}>Quiz Quest!</div>
 			<div class="promo-text">Take Quizzes</div>
 			<div class="promo-text" style="transform: translate( 7vw, 0px);">Make Quizzes</div>
 			<div class="promo-text">Share Quizzes</div>

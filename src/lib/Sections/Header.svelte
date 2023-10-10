@@ -16,7 +16,7 @@
 
 <div class="header">
 	<div class="logo-container">
-		<a href="./"><div class="logo" role="none" on:mouseenter={() => size.set(5)} on:mouseleave={() => size.set(15)}>{logo_text}</div></a>
+		<a href="./"><div class="logo" role="none" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>{logo_text}</div></a>
 	</div>
 	<div class="pages-container">
 		<ul>

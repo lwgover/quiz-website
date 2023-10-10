@@ -56,13 +56,13 @@
 <svg
 	class ="w-full h-full cursor"
 >
-	<circle cx={$coords1.x} cy={$coords1.y} r={$size} fill="white" style="mix-blend-mode: difference;" />
+	<circle cx={$coords1.x} cy={$coords1.y} r={$size} fill="white" style="mix-blend-mode: exclusion;" />
 </svg>
 <svg
 	class ="w-full h-full cursor"
     style = "z-index: 1000"
 >
-	<circle cx={$coords2.x} cy={$coords2.y} r={$size/2} fill="white" style="mix-blend-mode: difference;"/>
+	<circle cx={$coords2.x} cy={$coords2.y} r={Math.min(1/($size/100),$size/2)} fill="white" style="mix-blend-mode: difference;"/>
 </svg>
 
 <style>
