@@ -20,7 +20,6 @@
 	</div>
 	<div class="pages-container">
 		<ul>
-			<a href="./blog"><li class="page-item hover-underline-animation" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>Blog</li></a>
 			<a href="./take-a-quiz"><li class="page-item hover-underline-animation" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>Take a Quiz</li></a>
 			<a href="./make-quiz"><li class="page-item hover-underline-animation" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>Make a Quiz</li></a>
 			{#if user == null}
@@ -102,7 +101,7 @@
 		cursor: none;
 		background: linear-gradient(
 			to right,
-			transparent 20%,
+			transparent 50%,
 			rgb(223, 69, 128),
 			#f3715c,
 			#fbb040,
@@ -114,8 +113,8 @@
 		background-size: 200%;
 		background-position: right;
 		transition: 0.4s ease;
-		z-index: 1000;
 	}
+	
 	.hover-underline-animation {
 		display: inline-block;
 		position: relative;

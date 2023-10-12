@@ -2,6 +2,11 @@
 	import Seo from '$lib/Seo.svelte';
 	import Hero from '$lib/Sections/Hero.svelte';
 	import Header from '$lib/Sections/Header.svelte';
+	import Footer from '$lib/Sections/Footer.svelte';
+	import Cursor from '$lib/Sections/Cursor.svelte';
+	import Search from '$lib/Sections/Search.svelte';
+	import TakeQuiz from '$lib/Sections/TakeQuiz.svelte';
+	import {curr_quiz } from '../../stores/global.js';
 
 	/**
 	 * @type {number}
@@ -24,7 +29,13 @@
 <Seo />
 <main id="home">
 	<Header/>
-	<Hero/>
+	{#if $curr_quiz === ""}
+	<Search extraHeight={8}/>
+	{:else}
+	<TakeQuiz/>
+	{/if}
+	<Footer/>
+	<Cursor/>
 
 		<!--
     <Projects projects={data.projects} />

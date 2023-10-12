@@ -4,6 +4,8 @@
 	import Header from '$lib/Sections/Header.svelte';
 	import Search from '$lib/Sections/Search.svelte';
 	import Cursor from '$lib/Sections/Cursor.svelte';
+	import Info from '$lib/Sections/Info.svelte'
+	import Footer from '$lib/Sections/Footer.svelte';
 
 	/**
 	 * @type {number}
@@ -28,6 +30,8 @@
 	<Header/>
 	<Hero/>
 	<Search/>
+	<Info/>
+	<Footer/>
 	<Cursor/>
 
 		<!--

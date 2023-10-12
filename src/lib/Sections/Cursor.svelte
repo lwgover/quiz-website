@@ -74,11 +74,11 @@
 	}
 	
 	.w-full {
-		width: 100vw;
+		width: 100%;
 	}
 	
 	.h-full {
-		height: 100vw;
+		height: 100%;
 	}
 	
 	svg {
