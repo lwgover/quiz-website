@@ -6,6 +6,7 @@
 	import Cursor from '$lib/Sections/Cursor.svelte';
 	import Info from '$lib/Sections/Info.svelte'
 	import Footer from '$lib/Sections/Footer.svelte';
+	import TempAlert from '$lib/Sections/TempAlert.svelte';
 
 	/**
 	 * @type {number}
@@ -29,10 +30,11 @@
 <main id="home">
 	<Header/>
 	<Hero/>
-	<Search/>
+	<Search cursorExists={true}/>
 	<Info/>
 	<Footer/>
 	<Cursor/>
+	<TempAlert/>
 
 		<!--
     <Projects projects={data.projects} />

@@ -6,7 +6,7 @@
 	import Cursor from '$lib/Sections/Cursor.svelte';
 	import Search from '$lib/Sections/Search.svelte';
 	import TakeQuiz from '$lib/Sections/TakeQuiz.svelte';
-	import {curr_quiz } from '../../stores/global.js';
+	import { curr_quiz } from '../../stores/global.js';
 
 	/**
 	 * @type {number}
@@ -28,16 +28,15 @@
 <svelte:window bind:innerWidth={pageWidth} bind:innerHeight={pageHeight} bind:scrollY={scroll} />
 <Seo />
 <main id="home">
-	<Header/>
-	{#if $curr_quiz === ""}
-	<Search extraHeight={8}/>
+	<Header />
+	{#if $curr_quiz === ''}
+		<Search extraHeight={8} />
 	{:else}
-	<TakeQuiz/>
+		<TakeQuiz />
 	{/if}
-	<Footer/>
-	<Cursor/>
+	<Footer />
 
-		<!--
+	<!--
     <Projects projects={data.projects} />
     <Awards awards={data.awards} {isMobile} />
     <Blog posts={data.posts} {isMobile} /> 
@@ -46,6 +45,7 @@
 
 <style>
 	main {
+		cursor:auto;
 		display: grid;
 		width: 100%;
 		margin: 0 auto;

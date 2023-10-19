@@ -1,7 +1,9 @@
 <script>
 	import Seo from '$lib/Seo.svelte';
-	import Login from '$lib/Sections/Login.svelte';
-	import Header from '$lib/Sections/Header.svelte';
+	import Footer from '$lib/Sections/Footer.svelte';
+	import Cursor from '$lib/Sections/Cursor.svelte';
+	import Profile from '$lib/Sections/Profile.svelte'
+	import {curr_quiz } from '../../stores/global.js';
 
 	/**
 	 * @type {number}
@@ -13,36 +15,19 @@
 	let pageHeight;
 	$: isMobile = pageWidth < 768;
 	let scroll = 0;
-	let colors = [
-		'#8c4b6f',
-		'#f3715c',
-		'#fbb040',
-		'#10ac8f',
-		'#3d99d4',
-		'#66d2ea',
-		'#fe938c',
-		'#F1A9A0',
-		'#e55813',
-		'#f58233',
-		'#d88495',
-		'#ebbd30',
-		'#7DCFB6',
-		'#68ABB3',
-		'#A3DAE5',
-		'#D85C68',
-		'#9CEC5B',
-		'#FFB75E',
-		'#FFA931',
-		'#Fa5b30'
-	];
+	let parallax_rate = -1.001;
+	/**
+	 * @type {any}
+	 */
+	let currentStep;
 </script>
 
 <svelte:window bind:innerWidth={pageWidth} bind:innerHeight={pageHeight} bind:scrollY={scroll} />
 <Seo />
-<main id="home" style={`background: linear-gradient( to bottom right, ${
-    colors[Math.floor(Math.random() * colors.length)]
-}, ${colors[Math.floor(Math.random() * colors.length)]});`}>
-	<Login/>
+<main id="home">
+	<Profile/>
+	<Footer/>
+	<Cursor/>
 
 		<!--
     <Projects projects={data.projects} />
@@ -64,7 +49,6 @@
 		/* background-color: var(--primary-color); */
 		z-index: 100; /* This is over the nav */
 		position: relative;
-
 		/*background-image: url('');*/
 	}
 

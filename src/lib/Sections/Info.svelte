@@ -153,7 +153,7 @@
     <hr class='info-hr'/>
     <div class="info-title">The Origin Story</div>
     <div class="info-origin-text" style="padding-bottom: 20px">
-        Quiz Quest began as the final project for my Database Management class - a website where users could create and take quizzes. Working with Georgia and Jared, we created the initial project, but due to the limited time-frame and our inexperience with web development, we only managed to implement a basic solution. I decided to revisit this project post-graduation and completely overhaul it with the ultimate goal of making it available online.
+        Quiz Quest began as the final project for my Database Management class in 2022 - a website where users could create and take quizzes. Georgia Karwhite and Jared Vigliecca and I created the initial project, but due to the limited time-frame and our inexperience with web development, we only managed to implement a basic proof of concept version of this site. I always had a feeling the project could be something much better than it was, so I decided to revisit this project post-graduation and redo it from scratch, with the ultimate goal of making it available online.
     </div>
     <div class="info-origin-text" style="padding-bottom: 20px">
         This time, I chose to use a Flask server rather than an Express.js one, while also significantly improving the design. User password salting has been implemented for additional security, and I increased database security by enforcing stronger encryption algorithms than before. After many days of development work, what you see now is the result of my efforts!
@@ -228,8 +228,8 @@
 	.info {
 		background: linear-gradient(
 			to top right,
-			rgb(249, 212, 255),
-			rgb(237, 228, 255),
+			rgb(251, 223, 255),
+			rgb(247, 243, 255),
 			rgb(220, 243, 255)
 		);
 	}

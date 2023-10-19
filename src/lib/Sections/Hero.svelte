@@ -69,6 +69,7 @@
 <style>
 	.Hero {
 		overflow: hidden;
+		cursor:none;
 	}
     .quiz-picture-container-container-bc-im-good-at-css-and-naming {
         margin:40px;
@@ -257,20 +258,7 @@
 		height: 80vh;
 		width: 80vh;
 	}
-	#highlight {
-		position: absolute;
-		height: 30px;
-		width: 30px;
-		border-radius: 15px;
-		background:white;
-		-webkit-filter: invert(100%);
-    	filter: invert(100%);
-		z-index: 1001;
-	}
 	@media screen and (max-width: 768px) {
-		#highlight {
-			background: (rgba(255, 255, 255, 0) 45%, rgba(1, 1, 1, 0));
-		}
         .quiz-picture-container {
 		    height: 40vh;
 		    width: 70vw;

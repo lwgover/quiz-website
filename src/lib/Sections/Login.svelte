@@ -1,5 +1,6 @@
 <script>
 	// @ts-nocheck
+	import { user } from '../../stores/global.js';
 
 	var status = 'waiting';
 	async function loginUser(credentials) {
@@ -29,7 +30,10 @@
             	}  
         	}).then( respData => { 
         	    console.log(respData); // <-- log JSON response here
-                status = respData['status']
+                status = respData['status'];
+				if(respData['status'] === 'success'){
+					$user = userData;
+				}
         	    return respData;  // return JSON response for access in your promise chain
         	}) ;
 	}

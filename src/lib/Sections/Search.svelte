@@ -1,9 +1,11 @@
 <script>
 	import { onMount } from 'svelte';
-	import { cursor_size } from '../../stores/global.js';
+	import { cursor_size, curr_quiz } from '../../stores/global.js';
 	import { slide } from 'svelte/transition';
+	import TakeQuiz from './TakeQuiz.svelte';
 	let size = $cursor_size;
 	let value = '';
+	export let cursorExists = false;
 	export let extraHeight = 0;
 
 	let colors = [
@@ -54,7 +56,6 @@
 			title: null
 		}
 	];
-	console.log(quizzes);
 	const delay = (/** @type {number} */ ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	/**
@@ -62,29 +63,29 @@
 	 */
 	async function search(value) {
 		let searchTerm = { searchTerm: value };
-        quizzes = [
-		{
-			author: null,
-			description: null,
-			title: null
-		},
-		{
-			author: null,
-			description: null,
-			title: null
-		},
-		{
-			author: null,
-			description: null,
-			title: null
-		},
-		{
-			author: null,
-			description: null,
-			title: null
-		}
-	];
-		await delay(2000);
+		quizzes = [
+			{
+				author: null,
+				description: null,
+				title: null
+			},
+			{
+				author: null,
+				description: null,
+				title: null
+			},
+			{
+				author: null,
+				description: null,
+				title: null
+			},
+			{
+				author: null,
+				description: null,
+				title: null
+			}
+		];
+		//await delay(2000);
 		return fetch('http://127.0.0.1:5000/Search', {
 			method: 'POST',
 			headers: {
@@ -105,13 +106,19 @@
 			});
 	}
 	onMount(() => search(''));
+	/**
+	 * @param {{ [x: string]: string; }} quiz
+	 */
+	async function takeQuiz(quiz) {
+		$curr_quiz = quiz['id'];
+	}
 </script>
 
-<section class="search" style={`height:${100+extraHeight}vh;`}>
+<section class="search" style={`height:${100 + extraHeight}vh;`}>
 	<div class="search-background-pattern">
 		<div class="search-background-pattern-fade">
-			<div style={`height:${extraHeight}vh;`}/>
-			<div class='search-title'>Find a Quiz</div>
+			<div style={`height:${extraHeight}vh;`} />
+			<div class="search-title">Find a Quiz</div>
 			<div
 				class="search-bar-container"
 				role="search"
@@ -127,6 +134,7 @@
 							name="query"
 							placeholder="Search..."
 							autocomplete="one-time-code"
+							style = {cursorExists ? 'cursor:none;' : 'cursor:auto;'}
 						/>
 						<button type="submit" class="search-bar-submit-button"
 							><div class="search-bar-submit">&#9906;</div></button
@@ -138,31 +146,36 @@
 				<div class="search-results-flex-container">
 					{#if quizzes.length > 0}
 						{#each quizzes as quiz}
-							<div
-								class="search-quiz-mini"
-								style={`background: linear-gradient( to bottom right, ${
-									colors[Math.floor(Math.random() * colors.length)]
-								}, ${colors[Math.floor(Math.random() * colors.length)]});`}
-								transition:slide={{ delay: 200, duration: 300, axis: 'x' }}
-								role="none"
-							>
-								<div class="search-quiz-mini-background">
-									<div class="search-results-title search-results-loading">
-										{#if quiz['title'] === null}
-											<div class="search-result-title-loading"><div class="loading-shine" /></div>
-										{:else}
-											{quiz['title']}
-										{/if}
-									</div>
-									<div class="search-results-author search-results-loading">
-										{#if quiz['author'] === null}
-											<div class="search-result-author-loading"><div class="loading-shine" /></div>
-										{:else}
-											{quiz['author']}
-										{/if}
+							<a href={quiz['title'] === null ? './' : './take-a-quiz'}>
+								<div
+									class="search-quiz-mini"
+									style={`background: linear-gradient( to bottom right, ${
+										colors[Math.floor(Math.random() * colors.length)]
+									}, ${colors[Math.floor(Math.random() * colors.length)]});`}
+									transition:slide={{ delay: 200, duration: 300, axis: 'x' }}
+									role="none"
+									on:click={() => (quiz['title'] !== null ? takeQuiz(quiz) : '')}
+								>
+									<div class="search-quiz-mini-background">
+										<div class="search-results-title search-results-loading">
+											{#if quiz['title'] === null}
+												<div class="search-result-title-loading"><div class="loading-shine" /></div>
+											{:else}
+												{quiz['title']}
+											{/if}
+										</div>
+										<div class="search-results-author search-results-loading">
+											{#if quiz['author'] === null}
+												<div class="search-result-author-loading">
+													<div class="loading-shine" />
+												</div>
+											{:else}
+												{quiz['author']}
+											{/if}
+										</div>
 									</div>
 								</div>
-							</div>
+							</a>
 						{/each}
 					{:else}
 						<div
@@ -345,7 +358,6 @@
 		border: transparent;
 		font-size: 24px;
 		font-family: var(--font-serif);
-		cursor: none;
 	}
 	.search-bar {
 		width: 100%;

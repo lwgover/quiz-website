@@ -2,36 +2,95 @@
 	/**
 	 * @type {any}
 	 */
-	export let user = null;
 	import { getContext } from 'svelte';
-	import { cursor_size } from '../../stores/global.js';
+	import { cursor_size, curr_quiz, user } from '../../stores/global.js';
 	let size = $cursor_size;
-	
-    let logo_text = 'Q'
-    if (typeof window !== 'undefined') {
-        logo_text = window.innerWidth <780 ? 'Q' : 'Quiz Quest';
-    }
+
+	let logo_text = 'Q';
+	if (typeof window !== 'undefined') {
+		logo_text = window.innerWidth < 780 ? 'Q' : 'Quiz Quest';
+	}
 	//list of 20 bright and happy colors that work well together in a gradient
 </script>
 
 <div class="header">
 	<div class="logo-container">
-		<a href="./"><div class="logo" role="none" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>{logo_text}</div></a>
+		<a href="./"
+			><div
+				class="logo"
+				role="none"
+				on:mouseenter={() => size.set(3)}
+				on:mouseleave={() => size.set(15)}
+				on:click={function () {
+					$curr_quiz = '';
+				}}
+			>
+				{logo_text}
+			</div></a
+		>
 	</div>
 	<div class="pages-container">
 		<ul>
-			<a href="./take-a-quiz"><li class="page-item hover-underline-animation" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>Take a Quiz</li></a>
-			<a href="./make-quiz"><li class="page-item hover-underline-animation" on:mouseenter={() => size.set(3)} on:mouseleave={() => size.set(15)}>Make a Quiz</li></a>
-			{#if user == null}
-				<a href="./login"><li class="login page-item" on:mouseenter={() => size.set(5)} on:mouseleave={() => size.set(15)}>Sign In</li></a>
+			<a href="./take-a-quiz"
+				><li
+					class="page-item hover-underline-animation"
+					on:mouseenter={() => size.set(3)}
+					on:mouseleave={() => size.set(15)}
+				>
+					Take a Quiz
+				</li></a
+			>
+			<a href="./make-quiz"
+				><li
+					class="page-item hover-underline-animation"
+					on:mouseenter={() => size.set(3)}
+					on:mouseleave={() => size.set(15)}
+				>
+					Make a Quiz
+				</li></a
+			>
+			{#if $user == null}
+				<a href="./login"
+					><li
+						class="login page-item"
+						on:mouseenter={() => size.set(5)}
+						on:mouseleave={() => size.set(15)}
+					>
+						Sign In
+					</li></a
+				>
 			{:else}
-				<a href="./login"><div class="login">Login</div></a>
+				<a href="./profile"
+					><li
+						class="page-item profile hover-underline-animation"
+						on:mouseenter={() => size.set(3)}
+						on:mouseleave={() => size.set(15)}
+					>
+						<div class="svg-container">
+							<svg height="1.2vw" width="1.2vw" style="background: transparent; display:inline-block">
+								<circle fill="white" r="0.3vw" x="0.6vw" style="transform: translate(0.6vw, 0.45vw)" />
+								<circle fill="white" r="0.45vw" x="0.6vw" style="transform: translate(0.6vw, 1.2vw)" />
+							</svg>
+						</div>
+						<div class='profile-text-container'>Your Profile</div>
+					</li></a
+				>
 			{/if}
 		</ul>
 	</div>
 </div>
 
 <style>
+	.svg-container{
+		width: fit-content;
+		display: inline;
+	}
+	.profile-text-container {
+		display:inline-block;
+	}
+	.profile {
+		display: relative;
+	}
 	.pages-container {
 		width: fit-content;
 		float: right;
@@ -41,8 +100,9 @@
 	}
 	.page-item {
 		display: inline-block;
-        margin-right: 0vw;
-        padding: 0px;
+		margin-right: 0vw;
+		padding: 0px;
+		font-size: 1.3vw;
 	}
 	.login {
 		color: white;
@@ -101,20 +161,20 @@
 		cursor: none;
 		background: linear-gradient(
 			to right,
-			transparent 50%,
+			transparent 40%,
 			rgb(223, 69, 128),
 			#f3715c,
 			#fbb040,
 			#10ac8f,
 			#3d99d4,
-            rgb(166, 43, 175),
+			rgb(166, 43, 175),
 			#e51359
 		);
 		background-size: 200%;
 		background-position: right;
 		transition: 0.4s ease;
 	}
-	
+
 	.hover-underline-animation {
 		display: inline-block;
 		position: relative;
@@ -142,12 +202,12 @@
 		cursor: none;
 		z-index: 1000;
 	}
-    @media screen and (max-width: 568px) {
-        .page-item {
-            font-size: 2.9vw;
-        }
-        .logo {
-            font-size: 6.5vw;   
-        }
-    }
+	@media screen and (max-width: 568px) {
+		.page-item {
+			font-size: 2.9vw;
+		}
+		.logo {
+			font-size: 6.5vw;
+		}
+	}
 </style>

@@ -12,4 +12,7 @@ export const windowHeight = writable(0);
 
 export const isTouchscreen = writable(false);
 export const cursor_size = writable(spring(15));
+export const cursor_color = writable("#fff")
 export const curr_quiz = writable("");
+export const quiz_data = writable(null);
+export const user = writable(null);

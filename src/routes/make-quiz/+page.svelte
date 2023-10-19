@@ -2,6 +2,11 @@
 	import Seo from '$lib/Seo.svelte';
 	import Hero from '$lib/Sections/Hero.svelte';
 	import Header from '$lib/Sections/Header.svelte';
+	import Footer from '$lib/Sections/Footer.svelte';
+	import Cursor from '$lib/Sections/Cursor.svelte';
+	import Search from '$lib/Sections/Search.svelte';
+	import MakeQuiz from '$lib/Sections/MakeQuiz.svelte';
+	import { curr_quiz } from '../../stores/global.js';
 
 	/**
 	 * @type {number}
@@ -23,10 +28,11 @@
 <svelte:window bind:innerWidth={pageWidth} bind:innerHeight={pageHeight} bind:scrollY={scroll} />
 <Seo />
 <main id="home">
-	<Header/>
-	<Hero/>
+	<Header />
+	<MakeQuiz />
+	<Footer />
 
-		<!--
+	<!--
     <Projects projects={data.projects} />
     <Awards awards={data.awards} {isMobile} />
     <Blog posts={data.posts} {isMobile} /> 
@@ -35,6 +41,7 @@
 
 <style>
 	main {
+		cursor:auto;
 		display: grid;
 		width: 100%;
 		margin: 0 auto;

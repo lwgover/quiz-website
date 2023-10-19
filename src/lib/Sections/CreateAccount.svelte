@@ -1,10 +1,10 @@
 <script>
 	// @ts-nocheck
-    import bcrypt from 'bcryptjs';
     let passwordMatch = false;
+	import { user } from '../../stores/global.js';
 
 	var status = 'waiting';
-	async function loginUser(credentials) {
+	async function createUser(credentials) {
         status = 'loading';
 		const userData = {
 			// @ts-ignore
@@ -32,6 +32,9 @@
         	}).then( respData => { 
         	    console.log(respData); // <-- log JSON response here
                 status = respData['status']
+				if(respData['status'] === 'success'){
+					$user = userData;
+				}
         	    return respData;  // return JSON response for access in your promise chain
         	}) ;
 	}
@@ -99,7 +102,7 @@
 				password: password.value
 			};
 			console.log(JSON.stringify(data));
-			loginUser(data);
+			createUser(data);
 		}
 	}
 </script>
@@ -118,13 +121,13 @@
 			</div>
         {:else if status.localeCompare('success') == 0}
             <div class='login-success-text'>
-                You successfully logged in!
+                You successfully created an account!
             </div>
             <a href='./profile' ><div class="profile-button">Go to your Profile →</div></a>
 		{:else}
         {#if status.localeCompare('failed') == 0}
         <div class="text-input-container" style="color: red; text-align:center; transform: translate(0, -3vh);">
-            Invalid Username or Password, please try again</div>
+            Invalid Username or Password, please try a different combination</div>
             {/if}
             {#if !passwordMatch}
             <div class="text-input-container" id='noMatch' style="color: red; text-align:center; transform: translate(0, -3vh);">

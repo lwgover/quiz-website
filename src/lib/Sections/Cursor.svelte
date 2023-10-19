@@ -2,7 +2,7 @@
 	import { spring,tweened } from 'svelte/motion';
     import { cubicOut } from 'svelte/easing';
     import { setContext } from 'svelte'
-    import { cursor_size } from '../../stores/global.js';
+    import { cursor_size, cursor_color } from '../../stores/global.js';
     let X = 0;
     let Y = 0;
     let scrollY = 0;
@@ -65,7 +65,7 @@
 	class ="w-full h-full cursor"
     style = "z-index: 1000"
 >
-	<circle cx={$coords2.x} cy={$coords2.y} r={Math.min(1/($size/100),$size/2)} fill="white" style="mix-blend-mode: difference;"/>
+	<circle cx={$coords2.x} cy={$coords2.y} r={Math.min(1/($size/100),$size/2)} fill={$cursor_color}/>
 </svg>
 
 <style>

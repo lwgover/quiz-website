@@ -1,5 +1,5 @@
 :root {
-    --font-serif: font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif; 
+    --font-serif: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif; 
     --font-sans: Inter, -apple-system, sans-serif;
     --font-mono: "Andale Mono",
       "Ubuntu Mono", monospace;
@@ -9,7 +9,7 @@
     --footer-height: 650px;
     --section-margin-bottom: 5rem;
   
-    --pure-background-color: rgb(237, 228, 255);
+    --pure-background-color: rgb(247, 243, 255);
     --pure-background-color-rgb: 237, 228, 255;
     --dark-background-color: #260d4f;
     --dark-background-color-rgb: 31,16,63;
